@@ -44,9 +44,9 @@ btn.addEventListener("click", () => {
     setTimeout(() => {
       animando = false;
       btn.disabled = false;
-    }, 380);
+    }, 750);
 
-  }, 180);
+  }, 350);
 });
 
 // --------- FONDO: CORAZONES LED PARPADEANDO ----------
@@ -121,7 +121,7 @@ function draw(){
     if(h.alpha > 1 || h.alpha < 0.25) h.speed *= -1;
 
     // blanco suave tipo LED
-    ctx.fillStyle = `rgba(255,255,255,${h.alpha})`;
+    ctx.fillStyle = `rgba(255,0,0,${h.alpha})`;
 
     for(const p of h.pixels){
       ctx.beginPath();
@@ -134,3 +134,4 @@ function draw(){
 }
 
 draw();
+
