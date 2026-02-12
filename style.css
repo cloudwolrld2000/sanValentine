@@ -29,7 +29,6 @@ body{
 .container{
   position:relative;
   z-index:1;
-
   width:100%;
   max-width:900px;
 }
@@ -70,7 +69,7 @@ h1{
   line-height:1.7;
 }
 
-/* Botón-tarjeta unificado */
+/* Botón-tarjeta */
 .phraseBtn{
   margin-top:18px;
   width:100%;
@@ -83,21 +82,29 @@ h1{
   padding:16px;
   text-align:center;
   touch-action: manipulation;
-  transition: transform .15s ease, filter .3s ease, opacity .7s ease;
+  transition: transform .7s ease, filter .3s ease, opacity .7s ease;
 }
 
 .phraseBtn:hover{ filter: brightness(1.02); }
 .phraseBtn:active{ transform: translateY(1px) scale(.99); }
+
 .phraseBtn:disabled{
   opacity:.75;
   cursor:not-allowed;
 }
 
-/* animación tipo “tarjeta” */
+/* Animación tipo “tarjeta” */
 .phraseBtn.out{
   opacity:0;
-  transform: translateX(30px);
+  transform: translateX(150px);
 }
+
+.phraseBtn.reset{
+  transform: translateX(-150px);
+  opacity:0;
+  transition:none;
+}
+
 .phraseBtn.in{
   opacity:1;
   transform: translateX(0);
@@ -129,6 +136,8 @@ h1{
   .text{ max-width:520px; }
   .message{ font-size:16px; }
 }
+
+
 
 
 
