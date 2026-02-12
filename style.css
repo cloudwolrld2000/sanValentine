@@ -125,10 +125,11 @@ h1{
 @media(max-width:768px){
   body{ padding:18px; }
   .row{ flex-direction:column; text-align:center; gap:18px; }
-  .photo{ width:100%; max-width:360px; }
+  .photo{ width:100%; max-width:260px; }
   .text{ max-width:520px; }
   .message{ font-size:16px; }
 }
+
 
 
 
