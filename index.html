@@ -25,10 +25,17 @@ body{
   padding:30px;
 }
 
-/* Contenedor principal sin tarjeta */
 .container{
   width:100%;
   max-width:900px;
+}
+
+h1{
+  margin:0 0 18px 0;
+  color:white;
+  text-align:center;
+  font-size: clamp(22px, 3vw, 34px);
+  letter-spacing:.2px;
 }
 
 /* Layout lado a lado */
@@ -39,23 +46,18 @@ body{
   justify-content:center;
 }
 
-/* Imagen con marco */
 .photo{
   width:350px;
   border-radius:20px;
   border:8px solid white;
   box-shadow:0 20px 50px rgba(0,0,0,.3);
   object-fit:cover;
+  aspect-ratio: 3 / 4;
 }
 
 /* Texto */
 .text{
-  max-width:400px;
-  color:white;
-}
-
-h1{
-  margin-top:0;
+  max-width:420px;
   color:white;
 }
 
@@ -66,33 +68,65 @@ h1{
 
 /* Botón */
 .btn{
-  margin-top:20px;
-  padding:14px 20px;
+  margin-top:18px;
+  width:100%;
+  padding:14px 16px;
   border:none;
   border-radius:15px;
   background:white;
-  color:#ff2f7a;
-  font-weight:bold;
+  color:var(--accent);
+  font-weight:900;
   cursor:pointer;
   font-size:16px;
+  touch-action: manipulation;
+  transition: transform .08s ease, filter .2s ease;
+}
+.btn:hover{ filter: brightness(1.02); }
+.btn:active{ transform: translateY(1px) scale(.99); }
+.btn:disabled{
+  opacity:.65;
+  cursor:not-allowed;
 }
 
-.phrase{
-  margin-top:15px;
+/* Tarjetita */
+.deck{
+  margin-top:14px;
+  position:relative;
+  height:110px;
+}
+
+.slide{
+  position:absolute;
+  inset:0;
+  border-radius:18px;
+  padding:16px;
+  background: rgba(255,255,255,.92);
+  color:#222;
+  box-shadow:0 14px 30px rgba(0,0,0,.18);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
   font-size:16px;
-  min-height:30px;
+  line-height:1.5;
+
+  opacity:0;
+  transform: translateX(18px);
+  transition: opacity .35s ease, transform .35s ease;
+}
+
+.slide.show{
+  opacity:1;
+  transform: translateX(0);
 }
 
 /* Responsive móvil */
 @media(max-width:768px){
-  .row{
-    flex-direction:column;
-    text-align:center;
-  }
-  .photo{
-    width:100%;
-    max-width:350px;
-  }
+  body{ padding:18px; }
+  .row{ flex-direction:column; text-align:center; gap:18px; }
+  .photo{ width:100%; max-width:360px; }
+  .text{ max-width:520px; }
+  .message{ font-size:16px; }
 }
 </style>
 </head>
@@ -100,46 +134,80 @@ h1{
 <body>
 
 <div class="container">
+  <h1>💘 Feliz San Valentín, Pepito Suarez 💘</h1>
 
-<h1>💘 Feliz San Valentín, Pepito Suarez 💘</h1>
+  <div class="row">
+    <img class="photo" src="image/pareja.jpg" alt="Foto">
 
-<div class="row">
-  
-  <!-- Imagen izquierda -->
-  <img class="photo" src="image/pareja.jpg" alt="Foto">
+    <div class="text">
+      <div class="message">
+        Hoy quiero decirte algo sencillo pero sincero.
+        Gracias por cada momento y por hacer mi vida más bonita. ❤️
+      </div>
 
-  <!-- Texto derecha -->
-  <div class="text">
-    <div class="message">
-      Hoy quiero decirte algo sencillo pero sincero.
-      Gracias por cada momento y por hacer mi vida más bonita. ❤️
+      <button class="btn" id="btn">Dame una frase bonita ✨</button>
+
+      <div class="deck">
+        <div class="slide show" id="slide">Toca el botón y salen frases 💌</div>
+      </div>
     </div>
-
-    <button class="btn" onclick="mostrarFrase()">Dame una frase bonita ✨</button>
-    <div class="phrase" id="frase"></div>
   </div>
-
-</div>
-
 </div>
 
 <script>
 const frases = [
-"Eres mi parte favorita del día.",
-"Contigo todo se siente más bonito.",
-"Te elegiría una y mil veces.",
-"Mi lugar favorito es a tu lado.",
-"Me haces feliz sin esfuerzo."
+  "Eres mi parte favorita del día.",
+  "Contigo todo se siente más bonito.",
+  "Te elegiría una y mil veces.",
+  "Mi lugar favorito es a tu lado.",
+  "Me haces feliz sin esfuerzo.",
+  "Gracias por existir en mi vida.",
+  "Tu sonrisa me calma."
 ];
 
-function mostrarFrase(){
-  document.getElementById("frase").textContent =
-    frases[Math.floor(Math.random()*frases.length)];
+const btn = document.getElementById("btn");
+const slide = document.getElementById("slide");
+
+let animando = false;
+let lastIndex = -1;
+
+function nextPhrase(){
+  let i = Math.floor(Math.random() * frases.length);
+  if (frases.length > 1) {
+    while (i === lastIndex) i = Math.floor(Math.random() * frases.length);
+  }
+  lastIndex = i;
+  return frases[i];
 }
+
+btn.addEventListener("click", () => {
+  if (animando) return;
+
+  animando = true;
+  btn.disabled = true;
+
+  // salida
+  slide.classList.remove("show");
+
+  // entrada (sin acumular timers raros)
+  setTimeout(() => {
+    slide.textContent = nextPhrase();
+    slide.classList.add("show");
+
+    // desbloqueo cuando termina la transición
+    setTimeout(() => {
+      animando = false;
+      btn.disabled = false;
+    }, 380);
+
+  }, 180);
+});
 </script>
 
 </body>
 </html>
+
+
 
 
 
