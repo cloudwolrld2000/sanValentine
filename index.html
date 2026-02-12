@@ -1,225 +1,98 @@
-<!doctype html>
-<html lang="es">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Feliz San Valentín 💘</title>
-
 <style>
-  :root{
-    --bg1:#ff6aa2;
-    --bg2:#ff9cc8;
-    --accent:#ff2f7a;
-    --shadow:0 16px 45px rgba(0,0,0,.22);
-  }
+:root{
+  --bg1:#ff6aa2;
+  --bg2:#ff9cc8;
+  --accent:#ff2f7a;
+  --shadow:0 20px 60px rgba(0,0,0,.25);
+}
 
-  *{ box-sizing:border-box; }
+*{ box-sizing:border-box; }
 
-  body{
-    margin:0;
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:18px;
-    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-    background: linear-gradient(135deg, var(--bg1), var(--bg2));
-  }
+body{
+  margin:0;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: linear-gradient(135deg, var(--bg1), var(--bg2));
+}
 
-  .card{
-    width:100%;
-    max-width:430px;
-    background:#fff;
-    border-radius:26px;
-    box-shadow:var(--shadow);
-    overflow:hidden;
-  }
+/* 🔥 MÁS GRANDE */
+.card{
+  width:100%;
+  max-width:560px; /* antes 430px */
+  background:#fff;
+  border-radius:30px;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
 
-  .header{
-    padding:18px 18px 10px 18px;
-    text-align:center;
-  }
+.header{
+  padding:22px;
+  text-align:center;
+}
 
-  h1{
-    margin:0;
-    font-size:22px;
-    color:var(--accent);
-    letter-spacing:.2px;
-  }
+h1{
+  margin:0;
+  font-size:26px;
+  color:var(--accent);
+}
 
-  .photo{
-    width:100%;
-    aspect-ratio: 4 / 5;
-    object-fit:cover;
-    display:block;
-  }
+.photo{
+  width:100%;
+  aspect-ratio:4/5;
+  object-fit:cover;
+  display:block;
+}
 
-  .content{
-    padding:16px 18px 18px 18px;
-  }
+/* 🔥 MÁS ESPACIO INTERNO */
+.content{
+  padding:22px;
+}
 
-  .letter{
-    margin:0 0 14px 0;
-    font-size:15px;
-    line-height:1.6;
-    color:#222;
-  }
+.letter{
+  margin-bottom:18px;
+  font-size:16px;
+  line-height:1.7;
+}
 
-  .btn{
-    width:100%;
-    border:0;
-    border-radius:16px;
-    padding:14px 14px;
-    background: linear-gradient(135deg, #ff2f7a, #ff6aa2);
-    color:#fff;
-    font-weight:900;
-    font-size:16px;
-    cursor:pointer;
-    box-shadow: 0 12px 22px rgba(255,47,122,.25);
-    transition: transform .08s ease, filter .2s ease;
-  }
-  .btn:hover{ filter: brightness(1.03); }
-  .btn:active{ transform: translateY(1px) scale(.99); }
+.btn{
+  width:100%;
+  border:0;
+  border-radius:18px;
+  padding:16px;
+  background: linear-gradient(135deg, #ff2f7a, #ff6aa2);
+  color:#fff;
+  font-weight:900;
+  font-size:17px;
+  cursor:pointer;
+}
 
-  /* ===== Carrusel de tarjetitas ===== */
-  .deck{
-    position:relative;
-    margin-top:12px;
-    height:92px; /* alto fijo para que no “salte” */
-  }
+.deck{
+  position:relative;
+  margin-top:16px;
+  height:110px; /* antes 92px */
+}
 
-  .slide{
-    position:absolute;
-    inset:0;
-    border-radius:18px;
-    padding:14px 14px;
-    background: #fff6fa;
-    border: 1px solid rgba(0,0,0,.08);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    font-size:14.5px;
-    line-height:1.45;
-    color:#222;
-    box-shadow: 0 10px 18px rgba(0,0,0,.08);
-
-    opacity:0;
-    transform: translateX(18px);
-    pointer-events:none;
-  }
-
-  /* Estado visible */
-  .slide.show{
-    opacity:1;
-    transform: translateX(0);
-    pointer-events:auto;
-  }
-
-  /* Animaciones tipo PowerPoint */
-  .slide.enter{
-    animation: enter .45s ease both;
-  }
-  .slide.exit{
-    animation: exit .45s ease both;
-  }
-
-  @keyframes enter{
-    from{ opacity:0; transform: translateX(24px); }
-    to  { opacity:1; transform: translateX(0); }
-  }
-  @keyframes exit{
-    from{ opacity:1; transform: translateX(0); }
-    to  { opacity:0; transform: translateX(-24px); }
-  }
-
-  .hint{
-    margin-top:8px;
-    font-size:12px;
-    opacity:.7;
-    text-align:center;
-  }
+.slide{
+  position:absolute;
+  inset:0;
+  border-radius:20px;
+  padding:18px;
+  background:#fff6fa;
+  border:1px solid rgba(0,0,0,.08);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  font-size:16px;
+  line-height:1.5;
+}
 </style>
-</head>
 
-<body>
-  <main class="card">
-    <div class="header">
-      <h1>💘 Feliz San Valentín, Pepito Suarez 💘</h1>
-    </div>
 
-    <img class="photo" src="image/pareja.jpg" alt="Foto">
-
-    <div class="content">
-      <p class="letter">
-        Hoy quiero decirte algo sencillo pero sincero:
-        gracias por cada momento y por hacer mi vida más bonita. ❤️
-      </p>
-
-      <!-- Botón SIEMPRE visible -->
-      <button class="btn" id="btn">Dame una frase bonita ✨</button>
-
-      <!-- Tarjetitas con transición -->
-      <div class="deck" aria-live="polite">
-        <div class="slide show" id="slide">
-          Toca el botón y aparecerán frases en tarjetitas 💌
-        </div>
-      </div>
-
-      <div class="hint">Cada clic = una nueva tarjetita (con transición).</div>
-    </div>
-  </main>
-
-<script>
-  const frases = [
-    "Eres mi parte favorita del día.",
-    "Contigo todo se siente más bonito.",
-    "Te elegiría una y mil veces.",
-    "Mi lugar favorito es a tu lado.",
-    "Me haces feliz sin esfuerzo.",
-    "Gracias por existir en mi vida.",
-    "Tu sonrisa me calma."
-  ];
-
-  const btn = document.getElementById("btn");
-  const deck = document.querySelector(".deck");
-
-  let lastIndex = -1;
-  function nextPhrase(){
-    let i = Math.floor(Math.random() * frases.length);
-    if (frases.length > 1) {
-      while (i === lastIndex) i = Math.floor(Math.random() * frases.length);
-    }
-    lastIndex = i;
-    return frases[i];
-  }
-
-  btn.addEventListener("click", () => {
-    const oldSlide = deck.querySelector(".slide.show");
-
-    // crear nueva tarjetita
-    const newSlide = document.createElement("div");
-    newSlide.className = "slide";
-    newSlide.textContent = nextPhrase();
-    deck.appendChild(newSlide);
-
-    // animar salida de la anterior
-    if (oldSlide){
-      oldSlide.classList.remove("enter");
-      oldSlide.classList.add("exit");
-      oldSlide.classList.remove("show");
-      // borrar al terminar animación
-      setTimeout(() => oldSlide.remove(), 460);
-    }
-
-    // animar entrada de la nueva
-    newSlide.classList.add("show", "enter");
-    // limpiar clase enter luego (por si quieres efectos futuros)
-    setTimeout(() => newSlide.classList.remove("enter"), 500);
-  });
-</script>
-</body>
-</html>
 
 
 
