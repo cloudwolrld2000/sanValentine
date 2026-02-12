@@ -83,7 +83,7 @@ h1{
   padding:16px;
   text-align:center;
   touch-action: manipulation;
-  transition: transform .08s ease, filter .2s ease, opacity .35s ease;
+  transition: transform .15s ease, filter .3s ease, opacity .7s ease;
 }
 
 .phraseBtn:hover{ filter: brightness(1.02); }
@@ -96,7 +96,7 @@ h1{
 /* animación tipo “tarjeta” */
 .phraseBtn.out{
   opacity:0;
-  transform: translateX(18px);
+  transform: translateX(30px);
 }
 .phraseBtn.in{
   opacity:1;
@@ -129,3 +129,4 @@ h1{
   .text{ max-width:520px; }
   .message{ font-size:16px; }
 }
+
