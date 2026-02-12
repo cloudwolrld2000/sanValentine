@@ -51,7 +51,7 @@ h1{
 }
 
 .photo{
-  width:350px;
+  width:300px;
   border-radius:20px;
   border:8px solid white;
   box-shadow:0 20px 50px rgba(0,0,0,.3);
@@ -125,8 +125,9 @@ h1{
 @media(max-width:768px){
   body{ padding:18px; }
   .row{ flex-direction:column; text-align:center; gap:18px; }
-  .photo{ width:100%; max-width:360px; }
+  .photo{ width:100%; max-width:300px; }
   .text{ max-width:520px; }
   .message{ font-size:16px; }
 }
+
 
