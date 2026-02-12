@@ -44,9 +44,9 @@ btn.addEventListener("click", () => {
     setTimeout(() => {
       animando = false;
       btn.disabled = false;
-    }, 750);
+    }, 700);
 
-  }, 350);
+  }, 700);
 });
 
 // --------- FONDO: CORAZONES LED PARPADEANDO ----------
@@ -134,6 +134,7 @@ function draw(){
 }
 
 draw();
+
 
 
 
