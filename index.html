@@ -6,98 +6,221 @@
 <title>Feliz San Valentín 💘</title>
 
 <style>
-body{
-  margin:0;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
-  background: linear-gradient(135deg,#ff6aa2,#ff9cc8);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  min-height:100vh;
-  padding:20px;
-}
+  :root{
+    --bg1:#ff6aa2;
+    --bg2:#ff9cc8;
+    --accent:#ff2f7a;
+    --shadow:0 16px 45px rgba(0,0,0,.22);
+  }
 
-.card{
-  width:100%;
-  max-width:420px;
-  background:white;
-  border-radius:25px;
-  padding:20px;
-  box-shadow:0 15px 40px rgba(0,0,0,.2);
-  text-align:center;
-}
+  *{ box-sizing:border-box; }
 
-h1{
-  font-size:24px;
-  margin-bottom:15px;
-  color:#ff2f7a;
-}
+  body{
+    margin:0;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:18px;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    background: linear-gradient(135deg, var(--bg1), var(--bg2));
+  }
 
-img{
-  width:100%;
-  border-radius:18px;
-  margin-bottom:15px;
-}
+  .card{
+    width:100%;
+    max-width:430px;
+    background:#fff;
+    border-radius:26px;
+    box-shadow:var(--shadow);
+    overflow:hidden;
+  }
 
-.letter{
-  font-size:15px;
-  line-height:1.6;
-  margin-bottom:15px;
-}
+  .header{
+    padding:18px 18px 10px 18px;
+    text-align:center;
+  }
 
-button{
-  width:100%;
-  padding:14px;
-  border:none;
-  border-radius:15px;
-  background:#ff2f7a;
-  color:white;
-  font-weight:bold;
-  font-size:16px;
-  cursor:pointer;
-}
+  h1{
+    margin:0;
+    font-size:22px;
+    color:var(--accent);
+    letter-spacing:.2px;
+  }
 
-.phrase{
-  margin-top:12px;
-  min-height:40px;
-  font-size:14px;
-}
+  .photo{
+    width:100%;
+    aspect-ratio: 4 / 5;
+    object-fit:cover;
+    display:block;
+  }
+
+  .content{
+    padding:16px 18px 18px 18px;
+  }
+
+  .letter{
+    margin:0 0 14px 0;
+    font-size:15px;
+    line-height:1.6;
+    color:#222;
+  }
+
+  .btn{
+    width:100%;
+    border:0;
+    border-radius:16px;
+    padding:14px 14px;
+    background: linear-gradient(135deg, #ff2f7a, #ff6aa2);
+    color:#fff;
+    font-weight:900;
+    font-size:16px;
+    cursor:pointer;
+    box-shadow: 0 12px 22px rgba(255,47,122,.25);
+    transition: transform .08s ease, filter .2s ease;
+  }
+  .btn:hover{ filter: brightness(1.03); }
+  .btn:active{ transform: translateY(1px) scale(.99); }
+
+  /* ===== Carrusel de tarjetitas ===== */
+  .deck{
+    position:relative;
+    margin-top:12px;
+    height:92px; /* alto fijo para que no “salte” */
+  }
+
+  .slide{
+    position:absolute;
+    inset:0;
+    border-radius:18px;
+    padding:14px 14px;
+    background: #fff6fa;
+    border: 1px solid rgba(0,0,0,.08);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    font-size:14.5px;
+    line-height:1.45;
+    color:#222;
+    box-shadow: 0 10px 18px rgba(0,0,0,.08);
+
+    opacity:0;
+    transform: translateX(18px);
+    pointer-events:none;
+  }
+
+  /* Estado visible */
+  .slide.show{
+    opacity:1;
+    transform: translateX(0);
+    pointer-events:auto;
+  }
+
+  /* Animaciones tipo PowerPoint */
+  .slide.enter{
+    animation: enter .45s ease both;
+  }
+  .slide.exit{
+    animation: exit .45s ease both;
+  }
+
+  @keyframes enter{
+    from{ opacity:0; transform: translateX(24px); }
+    to  { opacity:1; transform: translateX(0); }
+  }
+  @keyframes exit{
+    from{ opacity:1; transform: translateX(0); }
+    to  { opacity:0; transform: translateX(-24px); }
+  }
+
+  .hint{
+    margin-top:8px;
+    font-size:12px;
+    opacity:.7;
+    text-align:center;
+  }
 </style>
 </head>
 
 <body>
+  <main class="card">
+    <div class="header">
+      <h1>💘 Feliz San Valentín, Pepito Suarez 💘</h1>
+    </div>
 
-<div class="card">
-  <h1>💘 Feliz San Valentín, Pepito Suarez 💘</h1>
+    <img class="photo" src="image/pareja.jpg" alt="Foto">
 
-  <img src="image/pareja.jpg" alt="Foto">
+    <div class="content">
+      <p class="letter">
+        Hoy quiero decirte algo sencillo pero sincero:
+        gracias por cada momento y por hacer mi vida más bonita. ❤️
+      </p>
 
-  <div class="letter">
-    Hoy quiero decirte algo sencillo pero sincero.
-    Gracias por cada momento y por hacer mi vida más bonita. ❤️
-  </div>
+      <!-- Botón SIEMPRE visible -->
+      <button class="btn" id="btn">Dame una frase bonita ✨</button>
 
-  <button onclick="mostrarFrase()">Dame una frase bonita ✨</button>
+      <!-- Tarjetitas con transición -->
+      <div class="deck" aria-live="polite">
+        <div class="slide show" id="slide">
+          Toca el botón y aparecerán frases en tarjetitas 💌
+        </div>
+      </div>
 
-  <div class="phrase" id="frase"></div>
-</div>
+      <div class="hint">Cada clic = una nueva tarjetita (con transición).</div>
+    </div>
+  </main>
 
 <script>
-const frases = [
-"Eres mi parte favorita del día.",
-"Contigo todo se siente más bonito.",
-"Te elegiría una y mil veces.",
-"Mi lugar favorito es a tu lado.",
-"Me haces feliz sin esfuerzo."
-];
+  const frases = [
+    "Eres mi parte favorita del día.",
+    "Contigo todo se siente más bonito.",
+    "Te elegiría una y mil veces.",
+    "Mi lugar favorito es a tu lado.",
+    "Me haces feliz sin esfuerzo.",
+    "Gracias por existir en mi vida.",
+    "Tu sonrisa me calma."
+  ];
 
-function mostrarFrase(){
-  document.getElementById("frase").textContent =
-    frases[Math.floor(Math.random()*frases.length)];
-}
+  const btn = document.getElementById("btn");
+  const deck = document.querySelector(".deck");
+
+  let lastIndex = -1;
+  function nextPhrase(){
+    let i = Math.floor(Math.random() * frases.length);
+    if (frases.length > 1) {
+      while (i === lastIndex) i = Math.floor(Math.random() * frases.length);
+    }
+    lastIndex = i;
+    return frases[i];
+  }
+
+  btn.addEventListener("click", () => {
+    const oldSlide = deck.querySelector(".slide.show");
+
+    // crear nueva tarjetita
+    const newSlide = document.createElement("div");
+    newSlide.className = "slide";
+    newSlide.textContent = nextPhrase();
+    deck.appendChild(newSlide);
+
+    // animar salida de la anterior
+    if (oldSlide){
+      oldSlide.classList.remove("enter");
+      oldSlide.classList.add("exit");
+      oldSlide.classList.remove("show");
+      // borrar al terminar animación
+      setTimeout(() => oldSlide.remove(), 460);
+    }
+
+    // animar entrada de la nueva
+    newSlide.classList.add("show", "enter");
+    // limpiar clase enter luego (por si quieres efectos futuros)
+    setTimeout(() => newSlide.classList.remove("enter"), 500);
+  });
 </script>
-
 </body>
 </html>
+
+
 
 
