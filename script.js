@@ -30,15 +30,23 @@ btn.addEventListener("click", () => {
   animando = true;
   btn.disabled = true;
 
-  // salida
+  // 1️⃣ Se va a la derecha
   btn.classList.remove("in");
   btn.classList.add("out");
 
-  // entrada
   setTimeout(() => {
+
     mainText.textContent = nextPhrase();
 
+    // 2️⃣ Teletransportar invisible a la izquierda
     btn.classList.remove("out");
+    btn.classList.add("reset");
+
+    // Forzar reflow
+    void btn.offsetWidth;
+
+    // 3️⃣ Animar regreso al centro
+    btn.classList.remove("reset");
     btn.classList.add("in");
 
     setTimeout(() => {
@@ -49,6 +57,7 @@ btn.addEventListener("click", () => {
   }, 700);
 });
 
+
 // --------- FONDO: CORAZONES LED PARPADEANDO ----------
 const canvas = document.getElementById("heartsBg");
 const ctx = canvas.getContext("2d");
@@ -58,16 +67,15 @@ function resize(){
   canvas.height = window.innerHeight;
 }
 resize();
+
 window.addEventListener("resize", () => {
   resize();
-  // reubica corazones al redimensionar para evitar que queden fuera
   initHearts();
 });
 
 let hearts = [];
 
 function createHeart(x, y, size){
-  // Patrón tipo “matriz LED”
   const pattern = [
     "01100110",
     "11111111",
@@ -120,7 +128,6 @@ function draw(){
     h.alpha += h.speed;
     if(h.alpha > 1 || h.alpha < 0.25) h.speed *= -1;
 
-    // rojo tipo LED
     ctx.fillStyle = `rgba(255,0,0,${h.alpha})`;
 
     for(const p of h.pixels){
@@ -134,6 +141,8 @@ function draw(){
 }
 
 draw();
+
+
 
 
 
