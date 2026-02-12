@@ -189,7 +189,24 @@ btn.addEventListener("click", () => {
 
   // entrada
   setTimeout(() => {
-    mainText.textConten
+    mainText.textContent = nextPhrase();
+
+    btn.classList.remove("out");
+    btn.classList.add("in");
+
+    setTimeout(() => {
+      animando = false;
+      btn.disabled = false;
+    }, 380);
+
+  }, 180);
+});
+</script>
+
+</body>
+</html>
+
+
 
 
 
