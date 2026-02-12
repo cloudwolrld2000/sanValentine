@@ -66,58 +66,55 @@ h1{
   line-height:1.7;
 }
 
-/* Botón */
-.btn{
+/* Botón-tarjeta unificado */
+.phraseBtn{
   margin-top:18px;
   width:100%;
-  padding:14px 16px;
   border:none;
-  border-radius:15px;
-  background:white;
-  color:var(--accent);
-  font-weight:900;
-  cursor:pointer;
-  font-size:16px;
-  touch-action: manipulation;
-  transition: transform .08s ease, filter .2s ease;
-}
-.btn:hover{ filter: brightness(1.02); }
-.btn:active{ transform: translateY(1px) scale(.99); }
-.btn:disabled{
-  opacity:.65;
-  cursor:not-allowed;
-}
-
-/* Tarjetita */
-.deck{
-  margin-top:14px;
-  position:relative;
-  height:110px;
-}
-
-.slide{
-  position:absolute;
-  inset:0;
   border-radius:18px;
-  padding:16px;
   background: rgba(255,255,255,.92);
   color:#222;
   box-shadow:0 14px 30px rgba(0,0,0,.18);
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  cursor:pointer;
+  padding:16px;
   text-align:center;
-  font-size:16px;
-  line-height:1.5;
-
-  opacity:0;
-  transform: translateX(18px);
-  transition: opacity .35s ease, transform .35s ease;
+  touch-action: manipulation;
+  transition: transform .08s ease, filter .2s ease, opacity .35s ease;
 }
 
-.slide.show{
+.phraseBtn:hover{ filter: brightness(1.02); }
+.phraseBtn:active{ transform: translateY(1px) scale(.99); }
+.phraseBtn:disabled{
+  opacity:.75;
+  cursor:not-allowed;
+}
+
+/* animación tipo “tarjeta” */
+.phraseBtn.out{
+  opacity:0;
+  transform: translateX(18px);
+}
+.phraseBtn.in{
   opacity:1;
   transform: translateX(0);
+}
+
+/* texto del botón */
+.phraseMain{
+  display:block;
+  font-weight:900;
+  font-size:16px;
+  color:var(--accent); /* mantiene el “estilo” del Dame una frase bonita */
+  line-height:1.35;
+}
+
+.phraseHint{
+  display:block;
+  margin-top:8px;
+  font-size:13px;
+  font-weight:700;
+  color: rgba(0,0,0,.55);
+  line-height:1.3;
 }
 
 /* Responsive móvil */
@@ -145,11 +142,11 @@ h1{
         Gracias por cada momento y por hacer mi vida más bonita. ❤️
       </div>
 
-      <button class="btn" id="btn">Dame una frase bonita ✨</button>
-
-      <div class="deck">
-        <div class="slide show" id="slide">Toca el botón y salen frases 💌</div>
-      </div>
+      <!-- BOTÓN-TARJETA -->
+      <button class="phraseBtn in" id="btn">
+        <span class="phraseMain" id="mainText">Dame una frase bonita ✨</span>
+        <span class="phraseHint">«Toca el botón y salen frases 💌»</span>
+      </button>
     </div>
   </div>
 </div>
@@ -166,7 +163,7 @@ const frases = [
 ];
 
 const btn = document.getElementById("btn");
-const slide = document.getElementById("slide");
+const mainText = document.getElementById("mainText");
 
 let animando = false;
 let lastIndex = -1;
@@ -187,25 +184,14 @@ btn.addEventListener("click", () => {
   btn.disabled = true;
 
   // salida
-  slide.classList.remove("show");
+  btn.classList.remove("in");
+  btn.classList.add("out");
 
-  // entrada (sin acumular timers raros)
+  // entrada
   setTimeout(() => {
-    slide.textContent = nextPhrase();
-    slide.classList.add("show");
+    mainText.textConten
 
-    // desbloqueo cuando termina la transición
-    setTimeout(() => {
-      animando = false;
-      btn.disabled = false;
-    }, 380);
 
-  }, 180);
-});
-</script>
-
-</body>
-</html>
 
 
 
