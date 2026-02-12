@@ -1,3 +1,10 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Feliz San Valentín 💘</title>
+
 <style>
 :root{
   --bg1:#ff6aa2;
@@ -19,11 +26,13 @@ body{
   background: linear-gradient(135deg, var(--bg1), var(--bg2));
 }
 
-/* 🔥 MÁS GRANDE */
 .card{
-  width:300px;
-  height:300px;
-  background:white;
+  width:100%;
+  max-width:560px;
+  background:#fff;
+  border-radius:30px;
+  box-shadow:var(--shadow);
+  overflow:hidden;
 }
 
 .header{
@@ -44,7 +53,6 @@ h1{
   display:block;
 }
 
-/* 🔥 MÁS ESPACIO INTERNO */
 .content{
   padding:22px;
 }
@@ -70,7 +78,7 @@ h1{
 .deck{
   position:relative;
   margin-top:16px;
-  height:110px; /* antes 92px */
+  height:110px;
 }
 
 .slide{
@@ -86,12 +94,61 @@ h1{
   text-align:center;
   font-size:16px;
   line-height:1.5;
+  transition: opacity .4s ease, transform .4s ease;
+  opacity:0;
+  transform:translateX(20px);
+}
+
+.slide.show{
+  opacity:1;
+  transform:translateX(0);
 }
 </style>
+</head>
 
+<body>
 
+<div class="card">
+  <div class="header">
+    <h1>💘 Feliz San Valentín, Pepito Suarez 💘</h1>
+  </div>
 
+  <img class="photo" src="image/pareja.jpg" alt="Foto">
 
+  <div class="content">
+    <div class="letter">
+      Hoy quiero decirte algo sencillo pero sincero.
+      Gracias por cada momento y por hacer mi vida más bonita. ❤️
+    </div>
 
+    <button class="btn" id="btn">Dame una frase bonita ✨</button>
 
+    <div class="deck">
+      <div class="slide show" id="slide">Toca el botón para ver frases 💌</div>
+    </div>
+  </div>
+</div>
 
+<script>
+const frases = [
+"Eres mi parte favorita del día.",
+"Contigo todo se siente más bonito.",
+"Te elegiría una y mil veces.",
+"Mi lugar favorito es a tu lado.",
+"Me haces feliz sin esfuerzo."
+];
+
+const btn = document.getElementById("btn");
+const slide = document.getElementById("slide");
+
+btn.addEventListener("click", () => {
+  slide.classList.remove("show");
+  setTimeout(() => {
+    slide.textContent = frases[Math.floor(Math.random()*frases.length)];
+    slide.classList.add("show");
+  }, 180);
+});
+</script>
+
+</body>
+</html>
