@@ -51,7 +51,7 @@ h1{
 }
 
 .photo{
-  width:300px;
+  width:350px;
   border-radius:20px;
   border:8px solid white;
   box-shadow:0 20px 50px rgba(0,0,0,.3);
@@ -83,7 +83,7 @@ h1{
   padding:16px;
   text-align:center;
   touch-action: manipulation;
-  transition: transform .15s ease, filter .3s ease, opacity .7s ease;
+  transition: transform .08s ease, filter .2s ease, opacity .35s ease;
 }
 
 .phraseBtn:hover{ filter: brightness(1.02); }
@@ -96,7 +96,7 @@ h1{
 /* animación tipo “tarjeta” */
 .phraseBtn.out{
   opacity:0;
-  transform: translateX(30px);
+  transform: translateX(18px);
 }
 .phraseBtn.in{
   opacity:1;
@@ -125,9 +125,10 @@ h1{
 @media(max-width:768px){
   body{ padding:18px; }
   .row{ flex-direction:column; text-align:center; gap:18px; }
-  .photo{ width:100%; max-width:300px; }
+  .photo{ width:100%; max-width:360px; }
   .text{ max-width:520px; }
   .message{ font-size:16px; }
 }
+
 
 
